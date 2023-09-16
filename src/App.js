@@ -3,7 +3,8 @@ import './App.css';
 import {MyButton} from './mybutton';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { actions } from './store';
+import { act } from 'react-dom/test-utils';
 
 function App() {
 
@@ -17,15 +18,15 @@ function App() {
   }
 
   const increment = () => {
-    dispatch({type: 'INC'});
+    dispatch(actions.increment());
   }
   
   const decrement = () => {
-    dispatch({type: 'DEC'});
+    dispatch(actions.decrement());
   }
 
   const addBy = () => {
-    dispatch({type: 'ADD', payload: 5});
+    dispatch(actions.add(10));
   }
 
 

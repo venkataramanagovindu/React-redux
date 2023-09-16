@@ -1,25 +1,27 @@
-import {createStore} from 'redux';
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-// action will have type and payload
-const reducerFn = (state={counter : 10}, action) => {
-    debugger;
+const counterSclice = createSlice({
+    name: 'counter',
+    initialState: {
+        counter: 0
+    },
+    reducers:{
+        increment(state, action){
+            state.counter++;
+        },
+        decrement(state, action){
+            state.counter--;
+        },
+        add(state, action){
+            state.counter += + action.payload;
+        }
+    } 
+});
 
-    // Should be sync fun
-    // We should not mutate original function
+export const actions = counterSclice.actions;
 
+const store = configureStore({
+    reducer: counterSclice.reducer
+});
 
-    if(action.type === 'INC'){
-        return {counter : state.counter + 1}
-    }
-    if(action.type === 'DEC'){
-        return {counter: state.counter - 1}
-    }
-    if(action.type === 'ADD'){
-        return {counter: state.counter + action.payload}
-    }
-    return state;
-}
-
-const store = createStore(reducerFn);
-
-export default store;
+export default store
